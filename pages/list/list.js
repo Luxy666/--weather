@@ -10,9 +10,13 @@ const weekMap = [
 
 Page({
   data: {
+    city: '广州市',
     weekWeather: []
   },
-  onLoad () {
+  onLoad (options) {
+    this.setData({
+      city: options.city
+    })
     this.getWeekWeather()
   },
   onPullDownRefresh () {
@@ -25,7 +29,7 @@ Page({
       url: 'https://test-miniprogram.com/api/weather/future',
       method: 'GET',
       data: {
-        city: '广州市',
+        city: this.data.city,
         time: new Date().getTime()
       },
       success: res => {
